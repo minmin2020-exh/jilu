@@ -375,5 +375,24 @@
     elDateEnd.onchange = render;
     elKeyword.oninput = render;
 </script>
+<!-- 右上角悬浮清空按钮 -->
+<div style="position:fixed;top:12px;right:12px;z-index:9999;">
+<button style="padding:6px 10px;background:#ed4337;color:#ffffff;border:none;border-radius:6px;font-size:13px;"
+onclick="clearAllBook()">⚠️清空记录</button>
+</div>
+
+<script>
+function clearAllBook(){
+    if(!confirm("⚠️确定删除全部订单与统计数据？删除后无法恢复！\n请务必先导出CSV做好备份！")){
+        return;
+    }
+    localStorage.removeItem("book_records");
+    localStorage.removeItem("book_stat");
+    localStorage.setItem("last_clear_time", Date.now());
+    alert("✅所有记账记录已经清空，页面即将刷新");
+    location.reload();
+}
+</script>
+
 </body>
 </html>
